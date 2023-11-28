@@ -1,7 +1,17 @@
-package ApiHappyTravel
+package main
 
-import "fmt"
+import (
+	"ApiHappyTravel/internal/config"
+	"ApiHappyTravel/pkg/database"
+	"log"
+)
 
 func main() {
-	fmt.Println("app")
+	cfg := config.LoadConfiguration()
+
+	db, err := database.Connect(cfg.Database)
+	if nil != err {
+		log.Fatal("Could not connect ", err)
+	}
+	defer db.Close()
 }
