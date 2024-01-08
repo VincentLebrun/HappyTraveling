@@ -9,7 +9,7 @@ type Personne struct {
 	Age      string `json:"age"`
 	Phone    string `json:"phone"`
 	Mail     string `json:"mail"`
-	Password string `json:"password"`
+	Password string `json:"password" bson:"password" validate:"required=true"`
 }
 
 type Event struct {
@@ -24,7 +24,7 @@ type Town struct {
 	Name   string `json:"name"`
 }
 
-type Trajet struct {
+type Travel struct {
 	IdTravel    int       `json:"id_travel"`
 	Driver      string    `json:"driver"`
 	Start       Town      `json:"start"`
