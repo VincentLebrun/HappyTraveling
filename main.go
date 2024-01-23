@@ -1,17 +1,19 @@
 package main
 
 import (
+	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
+
 	"ApiHappyTravel/internal/config"
-	"ApiHappyTravel/pkg/database"
 	"log"
 )
 
 func main() {
-	cfg := config.LoadConfiguration()
+	conf := config.LoadConfiguration()
 
-	db, err := database.Connect(cfg.Database)
-	if nil != err {
-		log.Fatal("Could not connect ", err)
+	db, err := sql.Open("mysql", conf.Database.DSN())
+	if err != nil {
+		log.Fatal("Error connecting to the database: ", err)
 	}
 	defer db.Close()
 }
